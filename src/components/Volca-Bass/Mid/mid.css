@@ -1,6 +1,6 @@
 /* MAIN KNOBS */
 #main-knobs{
-    grid-area: knobs;
+    grid-area: mid;
     display: grid;
     grid: 
     "octave peak filter lfo-rate lfo-int tune1 tune2 tune3 volume" 100% / 
