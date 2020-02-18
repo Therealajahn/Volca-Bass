@@ -1,7 +1,7 @@
 import React from 'react';
-// import Top from './Top/Top';
-// import Mid from './Mid/Mid';
-// import Bottom from './Bottom/Bottom';
+import Top from './Top/Top';
+import Mid from './Mid/Mid';
+import Bottom from './Bottom/Bottom';
 import Keyboard from './Keyboard/Keyboard';
 import './volca-bass.css';
 
@@ -18,9 +18,10 @@ function Bass() {
               <rect width="572" height="334" fill="#010101"/>
             </svg>
           <section id="face-plate">
-            {/* <Top />
+          
+            <Top />
             <Mid />
-            <Bottom /> */}
+            <Bottom />
           </section>  
             <Keyboard />
         </section>

@@ -70,8 +70,8 @@ function Keyboard() {
               <svg class="16 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-            </section> 
-        </section>    
+            </section>   
+        </section> 
     </div>
   );
 }

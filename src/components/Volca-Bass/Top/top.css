@@ -7,7 +7,7 @@
 }
 
 #plate{
-    grid-area: top;
+   margin-top: -50px;
 }
 #power{
     grid-area: power;

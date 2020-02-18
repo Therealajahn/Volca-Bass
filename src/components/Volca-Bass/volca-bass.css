@@ -41,8 +41,8 @@ main{
     grid-area: face;
     margin-left: 6px;
     margin-top: 6px;
-    display: grid;
     grid: "top" 100px "mid" 1fr "bottom" 1fr;
+    display: grid;
 }
 
 
