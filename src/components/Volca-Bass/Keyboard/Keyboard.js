@@ -22,52 +22,52 @@ function Keyboard() {
             </svg> 
 
             <section id="keys">
-              <svg class="1 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="1 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="2 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="2 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="3 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="3 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="4 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="4 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="5 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="5 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="6 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="6 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="7 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="7 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="8 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="8 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="9 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="9 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="10 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="10 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="11 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="11 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="12 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="12 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="13 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="13 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg class="14 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="14 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg class="15 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" stroke-width="2"/>
+              <svg className="15 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg>
-              <svg class="16 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="16 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
             </section>   

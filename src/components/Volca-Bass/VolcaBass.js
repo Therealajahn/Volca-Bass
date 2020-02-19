@@ -9,16 +9,15 @@ import './volca-bass.css';
 
 
 
-function Bass() {
+function VolcaBass() {
   return (
-    <div className="Bass">
+       
       <section id="volca-bass-container">
           <section id="volca-bass">
             <svg id="volca-base" width="572" height="334">
               <rect width="572" height="334" fill="#010101"/>
             </svg>
           <section id="face-plate">
-          
             <Top />
             <Mid />
             <Bottom />
@@ -26,8 +25,7 @@ function Bass() {
             <Keyboard />
         </section>
       </section>  
-    </div>
   );
 }
 
-export default Bass;
+export default VolcaBass;
