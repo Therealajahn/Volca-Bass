@@ -5,6 +5,35 @@ import "./mid.css";
 
 
 function Mid() {
+//STATE:
+//PROPS:
+//
+//this goes to knobs
+// Rotate knob when cliked based on mouse distance
+let filterKnob = document.getElementsByClassName("filter-knob");
+
+let knobClicked = false;
+// detect if mouse held down or not on knob
+// filterKnob[0].addEventListener("mousedown", () => {
+//     knobClicked = true;
+//     document.addEventListener("mousemove", () => {
+//         console.log("x",event.clientX);
+//         console.log("y:",event.clientY);
+//     })
+// })
+
+
+// if(knobClicked){
+//     document.addEventListener("mouseup", () => {
+    
+//         console.log(knobClicked);
+//         document.removeEventListener("mousemove", () => {
+//             console.log("x",event.clientX);
+//             console.log("y:",event.clientY);
+//         })
+//     });
+// }
+
   return (
     <div className="Mid">
         <section id="main-knobs">

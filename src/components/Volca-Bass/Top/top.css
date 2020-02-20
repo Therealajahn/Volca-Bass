@@ -36,31 +36,27 @@
     justify-self: center;
 }
 
-div.tempo{
-    grid-area:tempo;
-    justify-self: center;
-    width:20;
-    height:20;
-}
-div.attack{
-    grid-area:attack;
-    justify-self: center;
-    width:20;
-    height:20;
-}
-div.decay{
-    grid-area:decay;
-    justify-self: center;
-    width:20;
-    height:20;
-}
-div.eg-int{
-    grid-area:eg-int;
-    justify-self: center;
-    width:20;
-    height:20;
+div.tempo.knob {
+    width: 20px;
+    height: 20px;
+    z-index:10;
 }
 
+div.attack.knob {
+    width: 20px;
+    height: 20px;
+    z-index:10;
+}
+div.decay.knob {
+    width: 20px;
+    height: 20px;
+    z-index:10;
+}
+div.eg-int.knob {
+    width: 20px;
+    height: 20px;
+    z-index:10;
+}
 
 
 #midi{

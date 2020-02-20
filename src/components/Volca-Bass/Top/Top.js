@@ -5,6 +5,9 @@ import './top.css';
 
 
 function Top() {
+  
+  
+  
   return (
     <section id="top">
         <svg  id="plate" width="560" height="205">
