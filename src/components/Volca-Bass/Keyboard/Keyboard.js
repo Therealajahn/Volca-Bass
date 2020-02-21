@@ -11,7 +11,7 @@ function Keyboard() {
   //this goes to keyboard component
   function detectGUIKeyPress(){
     document.addEventListener("mousedown",(event) =>{
-      console.log(event.target.className);
+      // console.log(event.target.className);
       if(event.target.className.baseVal === "key"){
         
             //  buttonTriggerSynth(1,sound,event.target.id)

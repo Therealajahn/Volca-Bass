@@ -45,7 +45,6 @@ function VolcaBass() {
   // }
   
   useEffect(() => {
-  
     //setup Sound
     //Setup volume
         let gain = new Tone.Gain(0.05).toMaster();
@@ -62,7 +61,7 @@ function VolcaBass() {
             "attack" : 0.01,
         "decay" : 1,
         "sustain" : 1,
-        "release" : 1
+        "release" : 5
         }).connect(filter);
       
      //Setup filter env      
@@ -70,7 +69,7 @@ function VolcaBass() {
             "attack" : 0.001,
             "decay" : 0.01,
             "sustain" : 0.5,
-            "release" : 2,
+            "release" : 5,
             "baseFrequency" : 250,
             "octaves" : 2,
             "exponent" : 1,
@@ -93,6 +92,7 @@ function VolcaBass() {
   },[]);
 
   useEffect(()=>{
+    
     const {osc1, osc2, osc3, env, filtEnv} = sound.current;
     function startAudioContext(){    
       document.querySelector('.tempo').addEventListener('click', async () =>{
@@ -104,52 +104,48 @@ function VolcaBass() {
     function detectKeyboardPress(){
        document.addEventListener("keydown",(e) => {
           e.preventDefault();
-          gate.current = 1;
           key.current = e.key; 
-          console.log(key);
+          triggerSynth(key);
         });
-       document.addEventListener("keyup",(e) => {
-          gate.current = 0; 
+       document.addEventListener("keyup",(e) => { 
+          releaseSynth();
         });
       }
       detectKeyboardPress();
      
-  function updateOscs(note){
-    note = letterToNote[key];
+  
+  
+  function triggerSynth(key){
+    updateOscs(key.current);
+    env.triggerAttack();
+    filtEnv.triggerAttack();
+  };
+
+  function updateOscs(key){
+    const note = letterToNote[key];
     console.log(note);
     osc1.frequency.value = note;
     osc2.frequency.value = note;
     osc3.frequency.value = note;
-    if(gate){
-      console.log(gate);
-      osc1.start();
-      osc2.start();
-      osc3.start();
-  }else if(!gate){
-    console.log(gate);
-      osc1.stop();
-      osc2.stop();
-      osc3.stop();
+    
+    osc1.start();
+    osc2.start();
+    osc3.start();
+  };
+
+  function releaseSynth(){
+    
+    env.triggerRelease();
+    filtEnv.triggerRelease();
+    // turnOffOscs();
   }
-  };
 
-  function triggerSynth(){
-        
-      if(gate){
-        if(key){
-            updateOscs(key);
-            env.triggerAttack();
-            filtEnv.triggerAttack();
-        }
-        
-      }else if (!gate){
-          updateOscs();
-          env.triggerAttack();
-          filtEnv.triggerRelease();
-      }
-  };
-  triggerSynth();
-
+  function turnOffOscs(){
+    osc1.stop();
+    osc2.stop();
+    osc3.stop();
+  }
+  
 });
 
 
