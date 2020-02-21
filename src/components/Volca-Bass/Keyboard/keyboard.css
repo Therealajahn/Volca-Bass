@@ -1,5 +1,5 @@
-#keybed{
-    grid-area: keybed;
+#keyboard{
+    grid-area: keyboard;
     display: grid;
     grid: "top top top"30px
           "left keys right"65px

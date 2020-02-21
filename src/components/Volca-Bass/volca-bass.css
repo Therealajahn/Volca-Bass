@@ -31,7 +31,7 @@ main{
     width: 572px;
     height: 334px;
     grid-area:mod;
-    grid: "face" 210px "keybed" 1fr;
+    grid: "face" 210px "keyboard" 1fr;
     display: grid;
 }
 #volca-base{

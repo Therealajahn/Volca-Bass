@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./mid.css";
 
 
 
 
-function Mid() {
-//STATE:
+function Mid(props) {
 //PROPS:
-//
-//this goes to knobs
-// Rotate knob when cliked based on mouse distance
+// pass up knob value object 
+ 
+ useEffect(() => {
+   
+ //this goes to knobs
+// Rotate knob when clicked based on mouse distance
 let filterKnob = document.getElementsByClassName("filter-knob");
 
 let knobClicked = false;
@@ -33,6 +35,7 @@ let knobClicked = false;
 //         })
 //     });
 // }
+  });
 
   return (
     <div className="Mid">
