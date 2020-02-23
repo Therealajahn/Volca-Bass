@@ -10,12 +10,120 @@
 #keys{
     grid-area:keys;
     align-self: center;
+    display:grid;
+    grid: "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen" 100%;
+    grid-template-columns: repeat(16, 1fr);
 }
 
 .key{
     margin-left: 9px;
-    
+    align-items: center;
 }
+
+.one.key{
+    grid-area: one;    
+}
+.two.key{
+    grid-area: two;
+}
+.three.key{
+    grid-area: three;
+}
+.four.key{
+    grid-area: four;
+}
+.five.key{
+    grid-area: five;
+}
+.six.key{
+    grid-area: six;
+}
+.seven.key{
+    grid-area: seven;
+}
+.eight.key{
+    grid-area: eight;
+}
+.nine.key{
+    grid-area: nine;
+}
+.ten.key{
+    grid-area: ten;
+}
+.eleven.key{
+    grid-area: eleven;
+}
+.twelve.key{
+    grid-area: twelve;
+}
+.thirteen.key{
+    grid-area: thirteen;
+}
+.fourteen.key{
+    grid-area: fourteen;
+}
+.fifteen.key{
+    grid-area: fifteen;
+}
+.sixteen.key{
+    grid-area: sixteen;
+}
+
+div.key{
+    width: 22px;
+    height: 43px;
+    z-index: 10;
+}
+
+div.one.key{
+    grid-area: one;    
+}
+div.two.key{
+    grid-area: two;
+}
+div.three.key{
+    grid-area: three;
+}
+div.four.key{
+    grid-area: four;
+}
+div.five.key{
+    grid-area: five;
+}
+div.six.key{
+    grid-area: six;
+}
+div.seven.key{
+    grid-area: seven;
+}
+div.eight.key{
+    grid-area: eight;
+}
+div.nine.key{
+    grid-area: nine;
+}
+div.ten.key{
+    grid-area: ten;
+}
+div.eleven.key{
+    grid-area: eleven;
+}
+div.twelve.key{
+    grid-area: twelve;
+}
+div.thirteen.key{
+    grid-area: thirteen;
+}
+div.fourteen.key{
+    grid-area: fourteen;
+}
+div.fifteen.key{
+    grid-area: fifteen;
+}
+div.sixteen.key{
+    grid-area: sixteen;
+}
+
 #key-top{
     grid-area: top;
     margin-top: 6px;
@@ -35,4 +143,6 @@
     grid-area: bottom;
     align-self: end;
 }
+
+
 

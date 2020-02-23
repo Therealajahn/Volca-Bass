@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Top from './Top/Top';
 import Mid from './Mid/Mid';
 import Bottom from './Bottom/Bottom';
@@ -8,15 +8,19 @@ import * as Tone from 'tone';
 
 
 function VolcaBass() {
-  //STATE:
-  //keyboardGate
-  //keyboard event
-  //guiKeyGate
-  //guiKeyEvent
+  //PROPS:
   //knobvalue(object)
-  let gate = useRef(0);
+  let [gate,setGate] = useState(0);
   let key = useRef();
   let sound = useRef();
+  let func = useRef();
+
+  func.current =  function talon(){
+    return 'yes';
+  }
+  
+  
+  console.log(func.current());
   
   
   
@@ -32,6 +36,12 @@ function VolcaBass() {
      q: "c2",2: "c#2", w: "d2", 3: "d#2", e: "e2",r: "f2",
      5: "f#2",t: "g2", 6: "g#2", y: "a2", 7: "a#2", u: "b2",
      i: "c3", 9: "c#3", o: "d3", 0: "d#3", p: "e3",
+  }
+
+  const classToLetter = {
+      one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
+    seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
+    thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
   }
   
   // const numToNote = {
@@ -91,9 +101,11 @@ function VolcaBass() {
        
   },[]);
 
-  useEffect(()=>{
-    
-    const {osc1, osc2, osc3, env, filtEnv} = sound.current;
+
+  
+useEffect(() => { 
+  
+
     function startAudioContext(){    
       document.querySelector('.tempo').addEventListener('click', async () =>{
               await Tone.start()
@@ -104,26 +116,43 @@ function VolcaBass() {
     function detectKeyboardPress(){
        document.addEventListener("keydown",(e) => {
           e.preventDefault();
-          key.current = e.key; 
-          triggerSynth(key);
+          key.current = e.key;
+          setGate(1);
+          console.log(gate);
         });
        document.addEventListener("keyup",(e) => { 
-          releaseSynth();
+          setGate(0);
+          console.log(gate);
         });
       }
-      detectKeyboardPress();
+    detectKeyboardPress();
+},[]); 
+   
      
+// store these functions using useRefs they will act as methods  
+useEffect(() => {  
+  const {osc1, osc2, osc3, env, filtEnv} = sound.current;
   
-  
-  function triggerSynth(key){
+  function triggerSynth(){
+    console.log(key.current,
+      gate.current);
     updateOscs(key.current);
     env.triggerAttack();
     filtEnv.triggerAttack();
   };
+  triggerSynth();
+
+  function releaseSynth(){
+    
+    env.triggerRelease();
+    filtEnv.triggerRelease();
+  
+  }
+  releaseSynth();
 
   function updateOscs(key){
     const note = letterToNote[key];
-    console.log(note);
+    // console.log(note);
     osc1.frequency.value = note;
     osc2.frequency.value = note;
     osc3.frequency.value = note;
@@ -133,22 +162,17 @@ function VolcaBass() {
     osc3.start();
   };
 
-  function releaseSynth(){
-    
-    env.triggerRelease();
-    filtEnv.triggerRelease();
-    // turnOffOscs();
-  }
-
-  function turnOffOscs(){
-    osc1.stop();
-    osc2.stop();
-    osc3.stop();
-  }
-  
 });
+  
+  
+function keyNum(firstClass){
+  const note = classToLetter[firstClass];
+  console.log(note);
+}
 
-
+function mouseDown(isIt){
+  console.log(isIt);
+}
   
 
 return (
@@ -163,7 +187,10 @@ return (
             <Mid />
             <Bottom />
           </section>  
-            <Keyboard />
+            <Keyboard 
+              keyNum = { keyNum }
+              mouseDown = { mouseDown }
+            />
         </section>
         
       </section>  

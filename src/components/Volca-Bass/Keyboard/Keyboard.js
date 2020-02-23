@@ -1,30 +1,30 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import './keyboard.css'
 
 
 
 
-function Keyboard() {
+function Keyboard(props) {
    
   
-
-  //this goes to keyboard component
-  function detectGUIKeyPress(){
+  useEffect(()=>{
+  
+    function detectGUIKeyPress(){
     document.addEventListener("mousedown",(event) =>{
-      // console.log(event.target.className);
-      if(event.target.className.baseVal === "key"){
-        
-            //  buttonTriggerSynth(1,sound,event.target.id)
-            // change state of gate and guiKey
+      const firstClass =  event.target.className.split(' ')[0];
+      const fourthClass = event.target.className.split(' ')[3];
+      if( fourthClass === "key"){
+            props.keyNum(firstClass);
+            props.mouseDown(true);
         }
     });
 
-    // document.addEventListener("mouseup",
-    //   // ()=>buttonTriggerSynth(0,sound)
-    //   // change state of gate to 0
-    // );
+    document.addEventListener("mouseup",() => {
+      props.mouseDown(false);
+    });
   }
  detectGUIKeyPress();
+}, [props]);
 
   return (
        <section id="keyboard">
@@ -42,55 +42,107 @@ function Keyboard() {
             </svg> 
 
             <section id="keys">
-              <svg className="1 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="one over black key" />
+              
+              <svg className="one black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="2 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="two over gold key" />
+              
+              <svg className="two gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="3 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="three over black key" />
+              
+              <svg className="three black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="4 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="four over gold key" />
+              
+              <svg className="four gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="5 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="five over black key" />
+             
+              <svg className="five black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="6 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="six over black key" />
+              
+              <svg className="six black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="7 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="seven over gold key" />
+              
+              <svg className="seven gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="8 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="eight over black key" />
+              
+              <svg className="eight black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="9 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="nine over gold key" />
+              
+              <svg className="nine gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="10 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="ten over black key" />
+              
+              <svg className="ten black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="11 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="eleven over gold key" />
+              
+              <svg className="eleven gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="12 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="twelve over black key" />
+              
+              <svg className="twelve black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="13 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="thirteen over black key" />
+              
+              <svg className="thirteen black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg> 
-              <svg className="14 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="fourteen over gold key" />
+              
+              <svg className="fourteen gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-              <svg className="15 black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="fifteen over black key" />
+              
+              <svg className="fifteen black key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="22" height="43" rx="3" fill="black" stroke="#DBB942" strokeWidth="2"/>
               </svg>
-              <svg className="16 gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+              
+              <div className="sixteen over gold key" />
+            
+              <svg className="sixteen gold key" width="24" height="45" viewBox="0 0 24 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="23" height="44" rx="3.5" fill="#DBB942" stroke="black"/>
               </svg>
-            </section>   
+            </section> 
+            
+              
+              
+              
+               
         </section> 
   );
 }
