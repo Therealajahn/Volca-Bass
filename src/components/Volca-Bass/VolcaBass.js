@@ -10,23 +10,11 @@ import * as Tone from 'tone';
 function VolcaBass() {
   //PROPS:
   //knobvalue(object)
-  let [gate,setGate] = useState(0);
-  let key = useRef();
-  let sound = useRef();
-  let func = useRef();
-
-  func.current =  function talon(){
-    return 'yes';
-  }
+  
+  const key = useRef();
+  const sound = useRef();
   
   
-  console.log(func.current());
-  
-  
-  
-   
-  //this goes to keyboard component  
-  //Define keys to use for keyboard
   const letterToNote = {
     //bottom row
     z: "c1", s: "c#1", x: "d1", d: "d#1", c: "e1", v: "f1",
@@ -101,77 +89,81 @@ function VolcaBass() {
        
   },[]);
 
+  const envelope = useRef({
+    triggerOrRelease:
+
+    function triggerOrRelease(gate){ 
+      
+      if(gate){
+        triggerAttack()
+      }else{
+        releaseSynth();
+      };
+
+      function triggerAttack(){
+        const {env, filtEnv} = sound.current;
+          updateOscs(key.current);
+          env.triggerAttack();
+          filtEnv.triggerAttack();
+        };
+        
+      function releaseSynth(){
+        const {env, filtEnv} = sound.current;  
+          env.triggerRelease();
+          filtEnv.triggerRelease();
+        
+        }
+        
+      function updateOscs(note){
+        const {osc1, osc2, osc3,} = sound.current;
+          osc1.frequency.value = note;
+          osc2.frequency.value = note;
+          osc3.frequency.value = note;
+          
+          osc1.start();
+          osc2.start();
+          osc3.start();
+        };
+    } 
+  });
 
   
-useEffect(() => { 
-  
+  useEffect(() => { 
+       
+       const { triggerOrRelease } = envelope.current; 
+       
+        function startAudioContext(){    
+          document.querySelector('.tempo').addEventListener('click', async () =>{
+                  await Tone.start()
+          })
+        }
+        startAudioContext();
+        
+        function detectKeyboardPress(){
+          document.addEventListener("keydown",(e) => {
+              e.preventDefault();
+              key.current = letterToNote[e.key];
+              triggerOrRelease(1);
+             
+            });
+          document.addEventListener("keyup",(e) => { 
+              triggerOrRelease(0);
+             
+            });
+          }
+        detectKeyboardPress();
 
-    function startAudioContext(){    
-      document.querySelector('.tempo').addEventListener('click', async () =>{
-              await Tone.start()
-      })
-    }
-    startAudioContext();
-    
-    function detectKeyboardPress(){
-       document.addEventListener("keydown",(e) => {
-          e.preventDefault();
-          key.current = e.key;
-          setGate(1);
-          console.log(gate);
-        });
-       document.addEventListener("keyup",(e) => { 
-          setGate(0);
-          console.log(gate);
-        });
-      }
-    detectKeyboardPress();
-},[]); 
-   
-     
-// store these functions using useRefs they will act as methods  
-useEffect(() => {  
-  const {osc1, osc2, osc3, env, filtEnv} = sound.current;
-  
-  function triggerSynth(){
-    console.log(key.current,
-      gate.current);
-    updateOscs(key.current);
-    env.triggerAttack();
-    filtEnv.triggerAttack();
-  };
-  triggerSynth();
-
-  function releaseSynth(){
-    
-    env.triggerRelease();
-    filtEnv.triggerRelease();
-  
-  }
-  releaseSynth();
-
-  function updateOscs(key){
-    const note = letterToNote[key];
-    // console.log(note);
-    osc1.frequency.value = note;
-    osc2.frequency.value = note;
-    osc3.frequency.value = note;
-    
-    osc1.start();
-    osc2.start();
-    osc3.start();
-  };
-
-});
-  
-  
+      },[]); 
+      
+      
 function keyNum(firstClass){
   const note = classToLetter[firstClass];
-  console.log(note);
+  key.current = note;
 }
 
-function mouseDown(isIt){
-  console.log(isIt);
+function mouseDown(isMouseDown){
+  const { triggerOrRelease } = envelope.current;
+  isMouseDown ? triggerOrRelease(1) : triggerOrRelease(0);
 }
   
 

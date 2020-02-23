@@ -11,8 +11,13 @@ function Keyboard(props) {
   
     function detectGUIKeyPress(){
     document.addEventListener("mousedown",(event) =>{
-      const firstClass =  event.target.className.split(' ')[0];
-      const fourthClass = event.target.className.split(' ')[3];
+      let firstClass,fourthClass;
+      
+      if(event.target.className){
+        firstClass = event.target.className.split(' ')[0];
+        fourthClass = event.target.className.split(' ')[3];
+      }
+      
       if( fourthClass === "key"){
             props.keyNum(firstClass);
             props.mouseDown(true);
