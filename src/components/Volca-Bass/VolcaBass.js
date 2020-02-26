@@ -27,7 +27,7 @@ function VolcaBass() {
   }
 
   const classToLetter = {
-      one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
+    one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
     seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
     thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
   }
@@ -93,29 +93,38 @@ function VolcaBass() {
     triggerOrRelease:
 
     function triggerOrRelease(gate){ 
-      
-      if(gate){
-        triggerAttack()
-      }else{
+      if(gate === 1){
+        triggerAttack();
+      }else if(gate === 0){
         releaseSynth();
+      }else if(gate === 2){
+        attackAndRelease(arguments[1]);
       };
+      
+
+      function attackAndRelease(duration){
+        console.log(duration);
+       triggerAttack();
+        Tone.Transport.schedule(releaseSynth);
+      }
 
       function triggerAttack(){
-        const {env, filtEnv} = sound.current;
+        console.log("trigger");
+        const { env, filtEnv } = sound.current;
           updateOscs(key.current);
           env.triggerAttack();
           filtEnv.triggerAttack();
-        };
+      };
         
       function releaseSynth(){
-        const {env, filtEnv} = sound.current;  
+        console.log("release");
+        const { env, filtEnv } = sound.current;
           env.triggerRelease();
           filtEnv.triggerRelease();
-        
-        }
+      }
         
       function updateOscs(note){
-        const {osc1, osc2, osc3,} = sound.current;
+        const { osc1, osc2, osc3 } = sound.current;
           osc1.frequency.value = note;
           osc2.frequency.value = note;
           osc3.frequency.value = note;
@@ -127,17 +136,48 @@ function VolcaBass() {
     } 
   });
 
-  
+  const sequencer = useRef({
+    playNotes:
+      function playNotes() {
+        const { triggerOrRelease } = envelope.current;  
+        let part = new Tone.Part(function(time,event){
+          console.log("event", event); 
+          triggerOrRelease(2,"16n");
+           key.current = event.note;
+          },[{time:'0', note:'c1'},
+             {time:'0:1', note:'c1'},
+             {time:'0:2', note: 'c1'},
+             {time:'0:3', note: 'c1'}]);
+          part.start(0);
+          part.loop = 4;
+          part.loopEnd = '1m';
+          Tone.Transport.start(0);  
+      }
+      
+  });
+
   useEffect(() => { 
        
        const { triggerOrRelease } = envelope.current; 
        
+       
         function startAudioContext(){    
           document.querySelector('.tempo').addEventListener('click', async () =>{
-                  await Tone.start()
+                  await Tone.start();
+                  console.log('tone context started');
+                  
           })
         }
         startAudioContext();
+
+        function startSequencer(){
+          document.querySelector('.attack').addEventListener('click',(event) =>{
+            event.preventDefault();
+            sequencer.current.playNotes();
+          }) 
+        };
+        startSequencer();
+        
         
         function detectKeyboardPress(){
           document.addEventListener("keydown",(e) => {
@@ -153,9 +193,11 @@ function VolcaBass() {
           }
         detectKeyboardPress();
 
-      },[]); 
+  },[]); 
+
+  
       
-      
+//Executed from Keyboard      
 function keyNum(firstClass){
   const note = classToLetter[firstClass];
   key.current = note;
