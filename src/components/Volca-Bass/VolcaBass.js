@@ -94,21 +94,22 @@ function VolcaBass() {
 
     function triggerOrRelease(gate){ 
       if(gate === 1){
-        triggerAttack();
+        triggerSynth();
       }else if(gate === 0){
         releaseSynth();
-      }else if(gate === 2){
+      }else if(gate === 'loop'){
         attackAndRelease(arguments[1]);
       };
       
 
       function attackAndRelease(duration){
-        console.log(duration);
-       triggerAttack();
-        Tone.Transport.schedule(releaseSynth);
+        const { env, filtEnv } = sound.current;
+        updateOscs(key.current);
+        env.triggerAttackRelease(duration);
+        filtEnv.triggerAttackRelease(duration);
       }
 
-      function triggerAttack(){
+      function triggerSynth(){
         console.log("trigger");
         const { env, filtEnv } = sound.current;
           updateOscs(key.current);
@@ -140,18 +141,12 @@ function VolcaBass() {
     playNotes:
       function playNotes() {
         const { triggerOrRelease } = envelope.current;  
-        let part = new Tone.Part(function(time,event){
-          console.log("event", event); 
-          triggerOrRelease(2,"16n");
-           key.current = event.note;
-          },[{time:'0', note:'c1'},
-             {time:'0:1', note:'c1'},
-             {time:'0:2', note: 'c1'},
-             {time:'0:3', note: 'c1'}]);
-          part.start(0);
-          part.loop = 4;
-          part.loopEnd = '1m';
-          Tone.Transport.start(0);  
+        let counter = 0;
+        new Tone.Loop(() => {
+          triggerOrRelease('loop','16n','c1');/////////TTTTOOOOOODDDOOO: alter triggerOrRelease to work with this interface
+          counter = (counter + 1) % 16;
+        },'16n').start(0);
+        Tone.Transport.start();
       }
       
   });
@@ -162,8 +157,9 @@ function VolcaBass() {
        
        
         function startAudioContext(){    
-          document.querySelector('.tempo').addEventListener('click', async () =>{
-                  await Tone.start();
+          document.querySelector('.tempo').addEventListener('click', async (event) =>{
+                event.preventDefault();  
+                await Tone.start();
                   console.log('tone context started');
                   
           })
