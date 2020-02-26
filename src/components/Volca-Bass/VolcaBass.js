@@ -51,7 +51,7 @@ function VolcaBass() {
             type : 'lowpass',
             frequency : 100,
             rolloff : -12,
-            Q : 20,
+            Q : 15,
             gain : 0
         }).connect(gain);
     //Setup env   
@@ -64,13 +64,13 @@ function VolcaBass() {
       
      //Setup filter env      
         let filtEnv = new Tone.FrequencyEnvelope({
-            "attack" : 0.001,
-            "decay" : 0.01,
+            "attack" : 0.01,
+            "decay" : 0,
             "sustain" : 0.5,
             "release" : 5,
             "baseFrequency" : 250,
-            "octaves" : 2,
-            "exponent" : 1,
+            "octaves" : 1,
+            "exponent" : 2,
         }).connect(filter.frequency);
     //Setup oscs
        
@@ -98,13 +98,13 @@ function VolcaBass() {
       }else if(gate === 0){
         releaseSynth();
       }else if(gate === 'loop'){
-        attackAndRelease(arguments[1]);
+        attackAndRelease(arguments[1],arguments[2]);
       };
       
 
-      function attackAndRelease(duration){
+      function attackAndRelease(duration,note){
         const { env, filtEnv } = sound.current;
-        updateOscs(key.current);
+        updateOscs(note);
         env.triggerAttackRelease(duration);
         filtEnv.triggerAttackRelease(duration);
       }
@@ -143,10 +143,16 @@ function VolcaBass() {
         const { triggerOrRelease } = envelope.current;  
         let counter = 0;
         new Tone.Loop(() => {
-          triggerOrRelease('loop','16n','c1');/////////TTTTOOOOOODDDOOO: alter triggerOrRelease to work with this interface
+          const notes = ['a1','a2', 'a3', 'a4'];
+          
+          triggerOrRelease('loop','32n',notes[counter % 4]);
+          
           counter = (counter + 1) % 16;
         },'16n').start(0);
-        Tone.Transport.start();
+        Tone.Transport.swing = 0;
+        Tone.Transport.toggle().bpm.value = 30;
+        console.log(Tone.Transport.swing);
+        
       }
       
   });
