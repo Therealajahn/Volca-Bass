@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef} from 'react';
 import Top from './Top/Top';
 import Mid from './Mid/Mid';
 import Bottom from './Bottom/Bottom';
 import Keyboard from './Keyboard/Keyboard';
 import './volca-bass.css';
 import * as Tone from 'tone';
+import axios from 'axios';
 
 
 function VolcaBass() {
@@ -152,10 +153,15 @@ function VolcaBass() {
         Tone.Transport.swing = 0;
         Tone.Transport.toggle().bpm.value = 30;
         console.log(Tone.Transport.swing);
-        
       }
-      
   });
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api')
+      .then(res => {
+        console.log(res.data);
+      })
+  })
 
   useEffect(() => { 
        
@@ -195,7 +201,7 @@ function VolcaBass() {
           }
         detectKeyboardPress();
 
-  },[]); 
+  },[letterToNote]); 
 
   
       

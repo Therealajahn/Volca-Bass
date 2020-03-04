@@ -1,5 +1,6 @@
 import React from 'react';
 import VolcaBass from './components/Volca-Bass/VolcaBass';
+import './app.css';
 
 
 
