@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import Top from './Top/Top';
 import Mid from './Mid/Mid';
 import Bottom from './Bottom/Bottom';
@@ -11,7 +11,7 @@ import axios from 'axios';
 function VolcaBass() {
   //PROPS:
   //knobvalue(object)
-  
+  const [notes, setNotes] = useState(0);
   const key = useRef();
   const sound = useRef();
   
@@ -138,14 +138,26 @@ function VolcaBass() {
     } 
   });
 
+  const cors = useRef({
+    getSequence:
+      function(){
+        axios.get('http://localhost:8080/api')
+        .then(res => {
+          console.log(res.data.sequence);
+          setNotes(res.data.sequence);
+        })
+      }
+  })
+
   const sequencer = useRef({
     playNotes:
       function playNotes() {
-        const { triggerOrRelease } = envelope.current;  
+        const { triggerOrRelease } = envelope.current;
+        const { getSequence } = cors.current;  
+        getSequence();
         let counter = 0;
         new Tone.Loop(() => {
-          const notes = ['a1','a2', 'a3', 'a4'];
-          
+         
           triggerOrRelease('loop','32n',notes[counter % 4]);
           
           counter = (counter + 1) % 16;
@@ -156,12 +168,11 @@ function VolcaBass() {
       }
   });
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/api')
-      .then(res => {
-        console.log(res.data);
-      })
-  })
+  
+
+  
+    
+ 
 
   useEffect(() => { 
        
