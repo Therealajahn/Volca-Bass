@@ -12,9 +12,10 @@ function Mid(props) {
    
  //this goes to knobs
 // Rotate knob when clicked based on mouse distance
-let filterKnob = document.getElementsByClassName("filter-knob");
+// let filterKnob = document.getElementsByClassName("filter-knob");
 
-let knobClicked = false;
+// let knobClicked = false;
+
 // detect if mouse held down or not on knob
 // filterKnob[0].addEventListener("mousedown", () => {
 //     knobClicked = true;

@@ -11,7 +11,8 @@ import axios from 'axios';
 function VolcaBass() {
   //PROPS:
   //knobvalue(object)
-  const [notes, setNotes] = useState(0);
+  const[notes, setNotes] = useState(['a1']);
+  const[yes, setYes] = useState(5);
   const key = useRef();
   const sound = useRef();
   
@@ -137,42 +138,55 @@ function VolcaBass() {
         };
     } 
   });
-
+  
   const cors = useRef({
-    getSequence:
-      function(){
-        axios.get('http://localhost:8080/api')
+    get:
+      function getSequence(){
+        axios.get('http://localhost:8080/api/database')
         .then(res => {
-          console.log(res.data.sequence);
-          setNotes(res.data.sequence);
+          let sequence = res.data[20].sequence;
+          console.log(sequence);
+          setNotes(sequence);
         })
+        .then(() => {
+          play.current.playNotes();
+        })
+      },
+    
+    post:
+      function postSequence(){
+        let url = 'http://localhost:8080/api/database';
+        let data = {
+          name: "sequence one",
+          sequence : ['b2', 'c5', 'b7', 'd5']
       }
-  })
+      axios.post(url,data)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    }
+  });
 
-  const sequencer = useRef({
+  const play = useRef({    
     playNotes:
       function playNotes() {
+        console.log("playnotes runs");      
         const { triggerOrRelease } = envelope.current;
-        const { getSequence } = cors.current;  
-        getSequence();
+        // const { getSequence } = cors.current;  
+
         let counter = 0;
         new Tone.Loop(() => {
-         
+          
           triggerOrRelease('loop','32n',notes[counter % 4]);
           
           counter = (counter + 1) % 16;
         },'16n').start(0);
         Tone.Transport.swing = 0;
         Tone.Transport.toggle().bpm.value = 30;
-        console.log(Tone.Transport.swing);
       }
-  });
-
-  
-
-  
     
- 
+  });
 
   useEffect(() => { 
        
@@ -189,13 +203,23 @@ function VolcaBass() {
         }
         startAudioContext();
 
-        function startSequencer(){
+       
+       
+        function attackClicked(){
           document.querySelector('.attack').addEventListener('click',(event) =>{
             event.preventDefault();
-            sequencer.current.playNotes();
+            cors.current.get()
           }) 
         };
-        startSequencer();
+        attackClicked();
+
+        function decayClicked(){
+          document.querySelector('.decay').addEventListener('click',(event) =>{
+            event.preventDefault();
+            cors.current.post()
+          }) 
+        };
+        decayClicked();
         
         
         function detectKeyboardPress(){
@@ -207,12 +231,15 @@ function VolcaBass() {
             });
           document.addEventListener("keyup",(e) => { 
               triggerOrRelease(0);
-             
+               
             });
           }
         detectKeyboardPress();
 
-  },[letterToNote]); 
+  },[letterToNote, notes]);
+  
+  
+
 
   
       
