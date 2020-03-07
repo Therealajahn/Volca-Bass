@@ -11,8 +11,7 @@ import axios from 'axios';
 function VolcaBass() {
   //PROPS:
   //knobvalue(object)
-  const[notes, setNotes] = useState(['a1']);
-  const[yes, setYes] = useState(5);
+  // const[notes, setNotes] = useState(['a1']);
   const key = useRef();
   const sound = useRef();
   
@@ -49,11 +48,12 @@ function VolcaBass() {
     //Setup volume
         let gain = new Tone.Gain(0.05).toMaster();
     //Setup filter
+        let filterFreq = 200;
         let filter = new Tone.Filter({
             type : 'lowpass',
-            frequency : 100,
+            frequency : filterFreq,
             rolloff : -12,
-            Q : 15,
+            Q : 25,
             gain : 0
         }).connect(gain);
     //Setup env   
@@ -67,12 +67,12 @@ function VolcaBass() {
      //Setup filter env      
         let filtEnv = new Tone.FrequencyEnvelope({
             "attack" : 0.01,
-            "decay" : 0,
+            "decay" : 0.1,
             "sustain" : 0.5,
             "release" : 5,
-            "baseFrequency" : 250,
+            "baseFrequency" : filterFreq,
             "octaves" : 1,
-            "exponent" : 2,
+            "exponent" : 1,
         }).connect(filter.frequency);
     //Setup oscs
        
@@ -144,12 +144,12 @@ function VolcaBass() {
       function getSequence(){
         axios.get('http://localhost:8080/api/database')
         .then(res => {
-          let sequence = res.data[20].sequence;
+          let sequence = res.data[res.data.length -1].sequence;
           console.log(sequence);
-          setNotes(sequence);
+          return sequence;
         })
-        .then(() => {
-          play.current.playNotes();
+        .then(sequence => {
+          play.current.playNotes(sequence);
         })
       },
     
@@ -158,7 +158,7 @@ function VolcaBass() {
         let url = 'http://localhost:8080/api/database';
         let data = {
           name: "sequence one",
-          sequence : ['b2', 'c5', 'b7', 'd5']
+          sequence : ['b0', 'c0', 'b0', 'd0']
       }
       axios.post(url,data)
       .then(res => {
@@ -170,8 +170,9 @@ function VolcaBass() {
 
   const play = useRef({    
     playNotes:
-      function playNotes() {
-        console.log("playnotes runs");      
+      function playNotes(notes) {
+        console.log("playnotes runs"); 
+        console.log(notes);     
         const { triggerOrRelease } = envelope.current;
         // const { getSequence } = cors.current;  
 
@@ -236,13 +237,9 @@ function VolcaBass() {
           }
         detectKeyboardPress();
 
-  },[letterToNote, notes]);
-  
+  },[letterToNote]);
   
 
-
-  
-      
 //Executed from Keyboard      
 function keyNum(firstClass){
   const note = classToLetter[firstClass];
