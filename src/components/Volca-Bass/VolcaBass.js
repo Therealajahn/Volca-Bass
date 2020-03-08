@@ -8,13 +8,13 @@ import * as Tone from 'tone';
 import axios from 'axios';
 
 
+
 function VolcaBass() {
   //PROPS:
   //knobvalue(object)
   // const[notes, setNotes] = useState(['a1']);
   const key = useRef();
   const sound = useRef();
-  
   
   const letterToNote = {
     //bottom row

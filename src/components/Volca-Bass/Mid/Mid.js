@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import "./mid.css";
+import gsap from 'gsap';
 
 
 
@@ -8,22 +9,25 @@ function Mid(props) {
 //PROPS:
 // pass up knob value object 
  
- useEffect(() => {
-   
- //this goes to knobs
-// Rotate knob when clicked based on mouse distance
-// let filterKnob = document.getElementsByClassName("filter-knob");
 
-// let knobClicked = false;
+ useEffect(() => {
+  // gsap.to(".filter", {duration:1, rotation: 90})
+ 
+//this goes to knobs
+// Rotate knob when clicked based on mouse distance
+
+let filterKnob = document.getElementsByClassName(".filter");
+console.log(filterKnob);
+let knobClicked = false;
 
 // detect if mouse held down or not on knob
-// filterKnob[0].addEventListener("mousedown", () => {
-//     knobClicked = true;
-//     document.addEventListener("mousemove", () => {
-//         console.log("x",event.clientX);
-//         console.log("y:",event.clientY);
-//     })
-// })
+filterKnob[0].addEventListener("mousedown", () => {
+    knobClicked = true;
+    document.addEventListener("mousemove", (event) => {
+        console.log("x",event.clientX);
+        console.log("y:",event.clientY);
+    })
+})
 
 
 // if(knobClicked){
@@ -52,7 +56,7 @@ function Mid(props) {
               <ellipse cx="19" cy="18.5" rx="19" ry="18.5" fill="#727272"/>
               <path fillRule="evenodd" clipRule="evenodd" d="M1.82843 10.5714C0.656018 12.9745 0 15.6626 0 18.5C0 28.7173 8.50659 37 19 37C29.4934 37 38 28.7173 38 18.5C38 15.6626 37.344 12.9745 36.1716 10.5714H1.82843Z" fill="#C4C4C4"/>
             </svg>
-            <div className="filter over knob"></div>
+            <div className="filter over knob" ref="filter"></div>
             <svg className="filter knob" width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="37.5" cy="37.5" r="37.5" fill="#727272"/>
                 <path fillRule="evenodd" clipRule="evenodd" d="M3.60874 21.4286C1.29477 26.2996 0 31.7486 0 37.5C0 58.2107 16.7893 75 37.5 75C58.2107 75 75 58.2107 75 37.5C75 31.7486 73.7052 26.2996 71.3913 21.4286H3.60874Z" fill="#C4C4C4"/>
