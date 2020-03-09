@@ -246,8 +246,9 @@ function keyNum(firstClass){
   key.current = note;
 }
 
-function mouseDown(isMouseDown){
+function keyClicked(isMouseDown){
   const { triggerOrRelease } = envelope.current;
+  
   isMouseDown ? triggerOrRelease(1) : triggerOrRelease(0);
 }
   
@@ -266,7 +267,7 @@ return (
           </section>  
             <Keyboard 
               keyNum = { keyNum }
-              mouseDown = { mouseDown }
+              keyClicked = { keyClicked }
             />
         </section>
         

@@ -5,8 +5,7 @@ import './keyboard.css'
 
 
 function Keyboard(props) {
-   
-  
+
   useEffect(()=>{
   
     function detectGUIKeyPress(){
@@ -20,12 +19,11 @@ function Keyboard(props) {
 
       if(fourthClass === "key"){
             props.keyNum(firstClass);
-            props.mouseDown(true);
+            props.keyClicked(true);
         }
     });
-
     document.addEventListener("mouseup",() => {
-      props.mouseDown(false);
+      props.keyClicked(false);
     });
   }
  detectGUIKeyPress();
