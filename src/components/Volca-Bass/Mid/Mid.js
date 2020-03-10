@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./mid.css";
 import gsap from 'gsap';
 
@@ -8,32 +8,47 @@ import gsap from 'gsap';
 function Mid(props) {
 //PROPS:
 // pass up knob value object 
+const [mouse, setMouse] = useState();
 
+const [knobs, setKnobs] = useState({
+    filterKnob: 0
+});
 
 
 
  const handleClick = useRef({
-    mouseLocation:
-    function(){
- 
-
-// Rotate knob when clicked based on mouse distance
+    mouseLocation: () => {
+ // Rotate knob when clicked based on mouse distance
     const filter = document.querySelector(".filter");
     
-    filter.addEventListener('mousedown',(event) => {    
+
+    filter.addEventListener('mousedown',(event) => { 
+      event.preventDefault();   
       document.addEventListener("mousemove",rotateKnob);
     })
+
+    document.addEventListener('mouseup',(event) => {
+      document.removeEventListener('mousemove',rotateKnob);
+      updateKnobs(); 
+    } )
     
     function rotateKnob(event){
-      gsap.to(".filter", {duration:.1, rotation: getMouseCoordinates(event)})
+      
+      gsap.to(".filter", {duration:.01, rotation: getMouseCoordinates(event)})
     }
     
     function getMouseCoordinates(event){
-      console.log("x",event.clientX);
-      console.log("y:",event.clientY);
-      return  event.clientY / 2;
+      let adjustedMouse = knobs.filterKnob + (((event.clientY / 2) - 100) * -1)
+      setMouse(adjustedMouse);
+     
+      console.log("mouse:",mouse);
+      console.log("filter:",knobs.filterKnob);
     }
     
+    function updateKnobs() {
+
+      knobs.filterKnob = mouse;
+    }
     
     
   }   
@@ -41,7 +56,7 @@ function Mid(props) {
 
  useEffect(()=>{
    handleClick.current.mouseLocation();
- })
+ },[mouse, knobs])
 
   
 
