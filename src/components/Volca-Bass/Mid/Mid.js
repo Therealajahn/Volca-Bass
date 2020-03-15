@@ -24,28 +24,17 @@ const [knobs, setKnobs] = useState({
     // Rotate knob when clicked based on mouse distance
    const filter = document.querySelector(".filter");
        
-   let mouseDown = false;
-       filter.addEventListener('mousedown',(event) => { 
-         event.preventDefault();
-         mouseDown = true;
-         document.addEventListener('mousemove',rotateKnob,mouseDown);
-       })
-
-       document.addEventListener('mouseup',(event) => { 
-        event.preventDefault();
-        mouseDown = false;
-        const finalValue = rotateKnob(event);
-        setKnobs({filterKnob: finalValue});
-        
-      })
-
+      let mouseDown = false;
+      
+      document.addEventListener('mousemove',rotateKnob,mouseDown);
        
        
        function rotateKnob(event){
          let adjustedMouse = knobs.filterKnob + (((event.clientY / 2) - 100) * -1);
       
          if(mouseDown){
-          gsap.to(".filter", {duration:.01, rotation: adjustedMouse})
+          gsap.to(".filter", {duration: .01, rotation: adjustedMouse})
+          setKnobs({filterKnob: adjustedMouse});
          }
          return adjustedMouse;
        }
@@ -54,7 +43,7 @@ const [knobs, setKnobs] = useState({
        
      }
      mouseLocation();   
- },[knobs])
+ },[])
 
  console.log("filter:",knobs.filterKnob);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import Top from './Top/Top';
 import Mid from './Mid/Mid';
 import Bottom from './Bottom/Bottom';
@@ -27,11 +27,7 @@ function VolcaBass() {
      i: "c3", 9: "c#3", o: "d3", 0: "d#3", p: "e3",
   }
 
-  const classToLetter = {
-    one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
-    seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
-    thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
-  }
+ 
   
   // const numToNote = {
   //   1: "c1", 2: "c#1", 3: "d1", 4: "d#1", 5: "e1",
@@ -94,7 +90,7 @@ function VolcaBass() {
   const envelope = useRef({
     triggerOrRelease:
 
-    function triggerOrRelease(gate){ 
+    function(gate){ 
       if(gate === 1){
         triggerSynth();
       }else if(gate === 0){
@@ -223,7 +219,7 @@ function VolcaBass() {
         decayClicked();
         
         
-        function detectKeyboardPress(){
+        function detectMousePress(){
           document.addEventListener("keydown",(e) => {
               e.preventDefault();
               key.current = letterToNote[e.key];
@@ -235,23 +231,50 @@ function VolcaBass() {
                
             });
           }
-        detectKeyboardPress();
+        detectMousePress();
 
   },[letterToNote]);
+
+  const [keyClicked, setKeyClicked] = useState();
+  const [keyNum, setKeyNum] = useState();
+  const [knobClicked, setKnobClicked] = useState();
+  const [knobType, setKnobType] = useState();
+
+  useEffect(()=>{
+  
+    function detectGUIPress(){
+    document.addEventListener("mousedown",(event) =>{
+      let firstClass,thirdClass,fourthClass;
+    
+      if(typeof event.target.className === "string"){
+        firstClass = event.target.className.split(' ')[0];
+        thirdClass = event.target.className.split(' ')[2];
+        fourthClass = event.target.className.split(' ')[3];
+      }
+       
+      if(fourthClass === "key"){
+        setKeyClicked(true);
+        setKeyNum(firstClass);
+      }
+      
+      if(thirdClass === 'knob'){
+        setKnobClicked(true);
+        setKnobType(firstClass);
+      }
+    });
+    document.addEventListener("mouseup",() => {
+      setKeyClicked(false);
+      setKnobType(false);
+    });
+
+    
+
+  }
+ detectGUIPress();
+}, []);
   
 
-//Executed from Keyboard      
-function keyNum(firstClass){
-  const note = classToLetter[firstClass];
-  key.current = note;
-}
 
-function keyClicked(isMouseDown){
-  const { triggerOrRelease } = envelope.current;
-  
-  isMouseDown ? triggerOrRelease(1) : triggerOrRelease(0);
-}
-  
 
 return (
       <section id="volca-bass-container">
@@ -260,15 +283,16 @@ return (
             <svg id="volca-base" width="572" height="334">
               <rect width="572" height="334" fill="#010101"/>
             </svg>
-          <section id="face-plate">
-            <Top />
-            <Mid />
-            <Bottom />
-          </section>  
-            <Keyboard 
-              keyNum = { keyNum }
-              keyClicked = { keyClicked }
-            />
+              <section id="face-plate">
+                <Top />
+                <Mid />
+                <Bottom />
+              </section>  
+          <Keyboard 
+            keyClicked = {keyClicked}
+            keyNum  = {keyNum}
+            triggerOrRelease = {envelope.current}
+          />
         </section>
         
       </section>  

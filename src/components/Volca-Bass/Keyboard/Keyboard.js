@@ -5,29 +5,21 @@ import './keyboard.css'
 
 
 function Keyboard(props) {
-
-  useEffect(()=>{
   
-    function detectGUIKeyPress(){
-    document.addEventListener("mousedown",(event) =>{
-      let firstClass,fourthClass;
-    
-      if(typeof event.target.className === "string"){
-        firstClass = event.target.className.split(' ')[0];
-        fourthClass = event.target.className.split(' ')[3];
-      }
-
-      if(fourthClass === "key"){
-            props.keyNum(firstClass);
-            props.keyClicked(true);
-        }
-    });
-    document.addEventListener("mouseup",() => {
-      props.keyClicked(false);
-    });
+  const classToLetter = {
+    one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
+    seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
+    thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
   }
- detectGUIKeyPress();
-}, [props]);
+
+  console.log(props);
+  
+    function whenKeyClicked(){
+      const { triggerOrRelease, keyClicked} = props;
+      
+      keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
+    }
+    whenKeyClicked();
 
   return (
        <section id="keyboard">
