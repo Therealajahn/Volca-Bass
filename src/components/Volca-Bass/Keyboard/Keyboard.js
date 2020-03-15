@@ -15,7 +15,8 @@ function Keyboard(props) {
   console.log(props);
   
     function whenKeyClicked(){
-      const { triggerOrRelease, keyClicked} = props;
+      const { keyClicked } = props;
+      const { triggerOrRelease } = props.triggerOrRelease;
       
       keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
     }

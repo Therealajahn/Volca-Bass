@@ -14,7 +14,7 @@ function VolcaBass() {
   //knobvalue(object)
   // const[notes, setNotes] = useState(['a1']);
   const key = useRef();
-  const sound = useRef();
+  const [sound, setSound] = useState();
   
   const letterToNote = {
     //bottom row
@@ -77,13 +77,14 @@ function VolcaBass() {
         let osc3 = new Tone.Oscillator(440, "square").connect(env);
      
        
-        sound.current = {
+        setSound({
             osc1:osc1,
             osc2:osc2,
             osc3:osc3,
             env: env,
             filtEnv: filtEnv
-        }
+        })
+      
        
   },[]);
 
@@ -101,7 +102,7 @@ function VolcaBass() {
       
 
       function attackAndRelease(duration,note){
-        const { env, filtEnv } = sound.current;
+        const { env, filtEnv } = sound;
         updateOscs(note);
         env.triggerAttackRelease(duration);
         filtEnv.triggerAttackRelease(duration);
@@ -109,7 +110,7 @@ function VolcaBass() {
 
       function triggerSynth(){
         console.log("trigger");
-        const { env, filtEnv } = sound.current;
+        const { env, filtEnv } = sound;
           updateOscs(key.current);
           env.triggerAttack();
           filtEnv.triggerAttack();
@@ -117,13 +118,13 @@ function VolcaBass() {
         
       function releaseSynth(){
         console.log("release");
-        const { env, filtEnv } = sound.current;
+        const { env, filtEnv } = sound;
           env.triggerRelease();
           filtEnv.triggerRelease();
       }
         
       function updateOscs(note){
-        const { osc1, osc2, osc3 } = sound.current;
+        const { osc1, osc2, osc3 } = sound;
           osc1.frequency.value = note;
           osc2.frequency.value = note;
           osc3.frequency.value = note;
@@ -292,6 +293,7 @@ return (
             keyClicked = {keyClicked}
             keyNum  = {keyNum}
             triggerOrRelease = {envelope.current}
+            sound = {sound}
           />
         </section>
         
