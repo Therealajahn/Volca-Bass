@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import "./mid.css";
-import gsap from 'gsap';
 
 
 
@@ -9,37 +8,30 @@ function Mid(props) {
 //PROPS:
 // pass up knob value object 
 
-const [knobs, setKnobs] = useState({
-    filter: 0
-});
-const { knobClicked, knobType } = props;
+// const [knobs, setKnobs] = useState({
+//     filter: 0
+// });
 
+const { knobClicked, knobType, knobPosition } = props;
 
 
 
  useEffect(()=>{
-  function mouseLocation() {
-    // Rotate knob when clicked based on mouse distance
+ 
+   console.log(knobType);
+
+  document.getElementsByClassName('filter')[1].style.transform = `rotate(${knobPosition.filter}deg)`;
   
-       
+
+  
+  
+  
    
+    console.log(knobPosition.filter);   
+     
        
        
-      //  function rotateKnob(event){
-      //   event.preventDefault(); 
-      //   let adjustedMouse = knobs.filter + (((event.clientY / 2) - 100) * -1);
-      
-      //    if(knobClicked){
-      //     gsap.to(".filter", {duration: .01, rotation: adjustedMouse})
-      //     setKnobs({filterKnob: adjustedMouse});
-      //    }
-      //  }
-         
-        
-       
-     }
-     mouseLocation();   
- },[knobClicked, knobType, knobs])
+ },[knobPosition])
 
 //  console.log("filter:",knobs.filterKnob);
 

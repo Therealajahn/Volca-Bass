@@ -6,10 +6,12 @@ import Keyboard from './Keyboard/Keyboard';
 import './volca-bass.css';
 import * as Tone from 'tone';
 import axios from 'axios';
+import gsap from 'gsap';
 
 
 
 function VolcaBass() {
+ 
   //PROPS:
   //knobvalue(object)
   // const[notes, setNotes] = useState(['a1']);
@@ -59,8 +61,7 @@ function VolcaBass() {
       });
  
   const triggerOrRelease = useCallback((gate, note) => { 
-      console.log(gate);
-      console.log(sound.osc1.frequency.value)
+      
       if(gate === 1){
         triggerSynth(note);
       }else if(gate === 0){
@@ -189,13 +190,22 @@ function VolcaBass() {
   //update ui knobs clicked
   const [knobClicked, setKnobClicked] = useState();
   const [knobType, setKnobType] = useState();
-  //update on keyboard input
-  const [keyPressed, setKeyPressed] = useState();
-  const [whichPressed, setWhichPressed] = useState();
+   //update on keyboard input
+   const [keyPressed, setKeyPressed] = useState();
+   const [whichPressed, setWhichPressed] = useState();
+  //update knob continuously with mouse movement
+  const [knobPosition, setKnobPosition] = useState({
+    filter: null
+  });
+ 
+  
 
   async function whenMouseMoves(event){
     event.preventDefault();
-    console.log(event.clientY)
+    const previousPosition = 0;
+    const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
+    console.log("mouse;", adjustedMouse);
+    setKnobPosition({filter: adjustedMouse});
   }
 //i neeeed to route the mouse info to the mid component then I need to filter it into something that sets
 // the parameters for the synthesiszer so i need to set them in the 
@@ -225,7 +235,6 @@ useEffect(()=>{
     document.addEventListener('mouseup',() => {
       document.removeEventListener('mousemove',whenMouseMoves);
       setKeyClicked(false);
-      setKnobType(false);
     });
   }
  whenElementClicked();
@@ -255,6 +264,7 @@ return (
                 <Mid 
                   knobClicked = {knobClicked}
                   knobType = {knobType}
+                  knobPosition = {knobPosition}
                   />
                 <Bottom />
               </section>  
