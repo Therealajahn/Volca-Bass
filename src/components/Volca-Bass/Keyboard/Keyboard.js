@@ -11,16 +11,14 @@ function Keyboard(props) {
     seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
     thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
   }
-
-  console.log(props);
   
-    function whenKeyClicked(){
-      const { keyClicked } = props;
-      const { triggerOrRelease } = props.triggerOrRelease;
-      
+  useEffect(()=>{
+  function whenKeyClicked(){
+      const { keyClicked, triggerOrRelease } = props;
       keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
-    }
-    whenKeyClicked();
+  }
+  whenKeyClicked();
+})
 
   return (
        <section id="keyboard">

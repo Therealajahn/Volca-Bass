@@ -14,7 +14,12 @@ function VolcaBass() {
   //knobvalue(object)
   // const[notes, setNotes] = useState(['a1']);
   const key = useRef();
-  const [sound, setSound] = useState();
+  const [sound, setSound] = useState({
+    osc1:null,
+    osc2:null,
+    osc3:null,
+    env: null,
+    filtEnv: null});
   
   const letterToNote = {
     //bottom row
@@ -75,23 +80,21 @@ function VolcaBass() {
         let osc1 = new Tone.Oscillator(440,"square").connect(env);
         let osc2 = new Tone.Oscillator(440, "square").connect(env);
         let osc3 = new Tone.Oscillator(440, "square").connect(env);
-     
-       
+
         setSound({
-            osc1:osc1,
-            osc2:osc2,
-            osc3:osc3,
-            env: env,
-            filtEnv: filtEnv
+          osc1:osc1,
+          osc2:osc2,
+          osc3:osc3,
+          env: env,
+          filtEnv: filtEnv
         })
       
        
   },[]);
 
-  const envelope = useRef({
-    triggerOrRelease:
-
-    function(gate){ 
+ 
+  async function triggerOrRelease(gate){ 
+      console.log(sound)
       if(gate === 1){
         triggerSynth();
       }else if(gate === 0){
@@ -117,10 +120,10 @@ function VolcaBass() {
       };
         
       function releaseSynth(){
-        console.log("release");
-        const { env, filtEnv } = sound;
-          env.triggerRelease();
-          filtEnv.triggerRelease();
+      //   console.log("release");
+      // // const { env, filtEnv } = sound;
+      //     env.triggerRelease();
+      //     filtEnv.triggerRelease();
       }
         
       function updateOscs(note){
@@ -133,12 +136,12 @@ function VolcaBass() {
           osc2.start();
           osc3.start();
         };
-    } 
-  });
+  } 
   
-  const cors = useRef({
-    get:
-      function getSequence(){
+  
+  // const cors 
+  
+    async function getSequence(){
         axios.get('http://localhost:8080/api/database')
         .then(res => {
           let sequence = res.data[res.data.length -1].sequence;
@@ -148,10 +151,9 @@ function VolcaBass() {
         .then(sequence => {
           play.current.playNotes(sequence);
         })
-      },
+    }
     
-    post:
-      function postSequence(){
+    async function postSequence(){
         let url = 'http://localhost:8080/api/database';
         let data = {
           name: "sequence one",
@@ -163,15 +165,13 @@ function VolcaBass() {
         console.log(res.data);
       })
     }
-  });
-
+  
+  //TODO: convert these to async functions
   const play = useRef({    
     playNotes:
       function playNotes(notes) {
         console.log("playnotes runs"); 
-        console.log(notes);     
-        const { triggerOrRelease } = envelope.current;
-        // const { getSequence } = cors.current;  
+        console.log(notes);      
 
         let counter = 0;
         new Tone.Loop(() => {
@@ -187,11 +187,9 @@ function VolcaBass() {
   });
 
   useEffect(() => { 
+       console.log(sound.env);
        
-       const { triggerOrRelease } = envelope.current; 
-       
-       
-        function startAudioContext(){    
+       function startAudioContext(){    
           document.querySelector('.tempo').addEventListener('click', async (event) =>{
                 event.preventDefault();  
                 await Tone.start();
@@ -202,11 +200,11 @@ function VolcaBass() {
         startAudioContext();
 
        
-       
+       //TODO: convert these to async functions
         function attackClicked(){
           document.querySelector('.attack').addEventListener('click',(event) =>{
             event.preventDefault();
-            cors.current.get()
+            getSequence()
           }) 
         };
         attackClicked();
@@ -214,7 +212,7 @@ function VolcaBass() {
         function decayClicked(){
           document.querySelector('.decay').addEventListener('click',(event) =>{
             event.preventDefault();
-            cors.current.post()
+            postSequence()
           }) 
         };
         decayClicked();
@@ -234,15 +232,16 @@ function VolcaBass() {
           }
         detectMousePress();
 
-  },[letterToNote]);
+  },[sound]);
 
   const [keyClicked, setKeyClicked] = useState();
   const [keyNum, setKeyNum] = useState();
   const [knobClicked, setKnobClicked] = useState();
   const [knobType, setKnobType] = useState();
 
+
+
   useEffect(()=>{
-  
     function detectGUIPress(){
     document.addEventListener("mousedown",(event) =>{
       let firstClass,thirdClass,fourthClass;
@@ -272,7 +271,7 @@ function VolcaBass() {
 
   }
  detectGUIPress();
-}, []);
+}, [sound]);
   
 
 
@@ -292,7 +291,7 @@ return (
           <Keyboard 
             keyClicked = {keyClicked}
             keyNum  = {keyNum}
-            triggerOrRelease = {envelope.current}
+            triggerOrRelease = {triggerOrRelease}
             sound = {sound}
           />
         </section>
