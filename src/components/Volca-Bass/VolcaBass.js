@@ -94,6 +94,7 @@ function VolcaBass() {
 
  
   async function triggerOrRelease(gate){ 
+      console.log(gate);
       console.log(sound)
       if(gate === 1){
         triggerSynth();
@@ -104,29 +105,29 @@ function VolcaBass() {
       };
       
 
-      function attackAndRelease(duration,note){
+      async function attackAndRelease(duration,note){
         const { env, filtEnv } = sound;
         updateOscs(note);
         env.triggerAttackRelease(duration);
         filtEnv.triggerAttackRelease(duration);
       }
 
-      function triggerSynth(){
-        console.log("trigger");
-        const { env, filtEnv } = sound;
-          updateOscs(key.current);
-          env.triggerAttack();
-          filtEnv.triggerAttack();
+      async function triggerSynth(){
+        // console.log("trigger");
+        // const { env, filtEnv } = sound;
+        //   updateOscs(key.current);
+        //   env.triggerAttack();
+        //   filtEnv.triggerAttack();
       };
         
-      function releaseSynth(){
+      async function releaseSynth(){
       //   console.log("release");
-      // // const { env, filtEnv } = sound;
+      // const { env, filtEnv } = sound;
       //     env.triggerRelease();
       //     filtEnv.triggerRelease();
       }
         
-      function updateOscs(note){
+      async function updateOscs(note){
         const { osc1, osc2, osc3 } = sound;
           osc1.frequency.value = note;
           osc2.frequency.value = note;

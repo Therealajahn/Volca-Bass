@@ -15,9 +15,7 @@ const [knobs, setKnobs] = useState({
 
 
 
-// const handleClick = useRef({
-   
-//  });
+
 
  useEffect(()=>{
   function mouseLocation() {
@@ -45,7 +43,7 @@ const [knobs, setKnobs] = useState({
      mouseLocation();   
  },[])
 
- console.log("filter:",knobs.filterKnob);
+//  console.log("filter:",knobs.filterKnob);
 
   return (
     <div className="Mid">

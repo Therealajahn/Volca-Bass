@@ -5,20 +5,20 @@ import './keyboard.css'
 
 
 function Keyboard(props) {
-  
+  const { sound, keyClicked, triggerOrRelease } = props;
   const classToLetter = {
     one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
     seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
     thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
   }
   
-  useEffect(()=>{
-  function whenKeyClicked(){
-      const { keyClicked, triggerOrRelease } = props;
-      keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
+  async function whenKeyClicked(){
+    keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
   }
-  whenKeyClicked();
-})
+  
+  useEffect(()=>{
+    whenKeyClicked();
+  },[sound, keyClicked])
 
   return (
        <section id="keyboard">
