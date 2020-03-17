@@ -10,9 +10,9 @@ function Mid(props) {
 // pass up knob value object 
 
 const [knobs, setKnobs] = useState({
-    filterKnob: 0
+    filter: 0
 });
-
+const { knobClicked, knobType } = props;
 
 
 
@@ -20,28 +20,26 @@ const [knobs, setKnobs] = useState({
  useEffect(()=>{
   function mouseLocation() {
     // Rotate knob when clicked based on mouse distance
-   const filter = document.querySelector(".filter");
+  
        
-      let mouseDown = false;
+   
+       
+       
+      //  function rotateKnob(event){
+      //   event.preventDefault(); 
+      //   let adjustedMouse = knobs.filter + (((event.clientY / 2) - 100) * -1);
       
-      document.addEventListener('mousemove',rotateKnob,mouseDown);
-       
-       
-       function rotateKnob(event){
-         let adjustedMouse = knobs.filterKnob + (((event.clientY / 2) - 100) * -1);
-      
-         if(mouseDown){
-          gsap.to(".filter", {duration: .01, rotation: adjustedMouse})
-          setKnobs({filterKnob: adjustedMouse});
-         }
-         return adjustedMouse;
-       }
+      //    if(knobClicked){
+      //     gsap.to(".filter", {duration: .01, rotation: adjustedMouse})
+      //     setKnobs({filterKnob: adjustedMouse});
+      //    }
+      //  }
          
         
        
      }
      mouseLocation();   
- },[])
+ },[knobClicked, knobType, knobs])
 
 //  console.log("filter:",knobs.filterKnob);
 

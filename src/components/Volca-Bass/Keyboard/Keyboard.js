@@ -5,20 +5,43 @@ import './keyboard.css'
 
 
 function Keyboard(props) {
-  const { sound, keyClicked, triggerOrRelease } = props;
-  const classToLetter = {
-    one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
-    seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
-    thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
-  }
-  
-  async function whenKeyClicked(){
-    keyClicked ? triggerOrRelease(1) : triggerOrRelease(0);
-  }
-  
+  const { keyClicked, clickedNum, keyPressed, whichPressed, triggerOrRelease } = props;
+
   useEffect(()=>{
-    whenKeyClicked();
-  },[sound, keyClicked])
+    function whenGUIKeyClicked(){
+      
+      const numToLetter = {
+        one: "c1", two: "c#1", three: "d1", four: "d#1", five: "e1", six: "f1",
+        seven: "f#1", eight: "g1", nine: "g#1", ten: "a1", eleven: "a#1", twelve: "b1",
+        thirteen: "c2", fourteen: "c#2", fifteen: "d2", sixteen: "d#2",
+      }
+
+      keyClicked ? triggerOrRelease(1, numToLetter[clickedNum]) : triggerOrRelease(0);
+    }
+    whenGUIKeyClicked();
+  
+  }, [keyClicked, clickedNum, triggerOrRelease])
+
+  useEffect(()=>{
+    function whenKeyPressed(){
+    
+      const letterToNote = {
+        //bottom row
+        z: "c1", s: "c#1", x: "d1", d: "d#1", c: "e1", v: "f1",
+        g: "f#1", b: "g1", h: "g#1", n: "a1", j: "a#1", m: "b1",
+        ',': "c2", l: "c#2", '.': "d2", ';': "d#2",'/': "e2",
+        //top row
+        q: "c2",2: "c#2", w: "d2", 3: "d#2", e: "e2",r: "f2",
+        5: "f#2",t: "g2", 6: "g#2", y: "a2", 7: "a#2", u: "b2",
+        i: "c3", 9: "c#3", o: "d3", 0: "d#3", p: "e3",
+      }
+      
+      keyPressed ? triggerOrRelease(1, letterToNote[whichPressed]) : triggerOrRelease(0);
+    }
+    whenKeyPressed();
+  }, [keyPressed, whichPressed, triggerOrRelease])
+  
+  
 
   return (
        <section id="keyboard">
