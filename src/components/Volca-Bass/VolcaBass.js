@@ -6,7 +6,7 @@ import Keyboard from './Keyboard/Keyboard';
 import './volca-bass.css';
 import * as Tone from 'tone';
 import axios from 'axios';
-import gsap from 'gsap';
+
 
 
 
@@ -195,17 +195,20 @@ function VolcaBass() {
    const [whichPressed, setWhichPressed] = useState();
   //update knob continuously with mouse movement
   const [knobPosition, setKnobPosition] = useState({
-    filter: null
+    'filter': null,
+    'lfo-rate': null
   });
+  const [mousePosition, setMousePosition] = useState();
  
   
 
-  async function whenMouseMoves(event){
+  async function whenMouseMoves(event,firstClass){
     event.preventDefault();
     const previousPosition = 0;
     const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
-    console.log("mouse;", adjustedMouse);
-    setKnobPosition({filter: adjustedMouse});
+    setMousePosition(adjustedMouse);
+    knobPosition[firstClass] = adjustedMouse;
+     
   }
 //i neeeed to route the mouse info to the mid component then I need to filter it into something that sets
 // the parameters for the synthesiszer so i need to set them in the 
@@ -226,9 +229,9 @@ useEffect(()=>{
       }
       
       if(thirdClass === 'knob' || fourthClass === 'knob'){
-        document.addEventListener('mousemove',whenMouseMoves);
-        setKnobClicked(true);
         setKnobType(firstClass);
+        setKnobClicked(true);
+        document.addEventListener('mousemove', whenMouseMoves(event,firstClass));
       }
     });
     
@@ -265,6 +268,7 @@ return (
                   knobClicked = {knobClicked}
                   knobType = {knobType}
                   knobPosition = {knobPosition}
+                  mousePosition = {mousePosition}
                   />
                 <Bottom />
               </section>  

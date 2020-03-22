@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import "./mid.css";
+import gsap from 'gsap';
 
 
 
@@ -12,26 +13,14 @@ function Mid(props) {
 //     filter: 0
 // });
 
-const { knobClicked, knobType, knobPosition } = props;
+const { knobClicked, knobType, knobPosition, mousePosition } = props;
 
-
-
- useEffect(()=>{
- 
-   console.log(knobType);
-
-  document.getElementsByClassName('filter')[1].style.transform = `rotate(${knobPosition.filter}deg)`;
-  
-
-  
-  
-  
-   
-    console.log(knobPosition.filter);   
-     
-       
-       
- },[knobPosition])
+  useEffect(()=>{
+    let element = document.getElementsByClassName(knobType);
+    console.log(mousePosition);
+    
+   gsap.to(element,{duration: .1, rotation: Number(knobPosition['filter'])}); 
+  },[knobPosition, knobType, mousePosition])
 
 //  console.log("filter:",knobs.filterKnob);
 
