@@ -11,3 +11,81 @@
 .button{
     margin-top:10px;
 }
+
+.button-border{
+    fill: #686868;
+}
+
+/* RED"#FF0000" */
+#screen{
+    grid-area:screen;
+}
+
+.memory-write.button{
+    grid-area: memory;
+}
+
+step-slide.button{
+    grid-area: step;
+}
+
+play-active-step.button{
+    grid-area: play;
+}
+
+stop-step-rec.button{
+    grid-area: stop;
+}
+
+vco1-mute.button{
+    grid-area: vco1;
+}
+
+vco2-mute.button{
+    grid-area: vco2;
+}
+
+vco3-mute.button{
+    grid-area: vco3;
+}
+
+func.button{
+    grid-area: func;
+}
+
+/* BUTTON OVERLAYS */
+
+div.memory-write.button{
+    grid-area: memory;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
+}
+
+div.step-slide.button{
+    grid-area: step;
+}
+
+div.play-active-step.button{
+    grid-area: play;
+}
+
+div.stop-step-rec.button{
+    grid-area: stop;
+}
+
+div.vco1-mute.button{
+    grid-area: vco1;
+}
+
+div.vco2-mute.button{
+    grid-area: vco2;
+}
+
+div.vco3-mute.button{
+    grid-area: vco3;
+}
+
+div.func.button{
+    grid-area: func;
+}

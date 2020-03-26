@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './top.css';
 
 
 
 
-function Top() {
+function Top(props) {
   
+const {smallKnobType, smallKnobClicked} = props;
+
+// useEffect(()=>{
+//   console.log('topKnobType:',topKnobType);
+//   console.log('topKnobClicked:',topKnobClicked);
+// },[topKnobClicked, topKnobType]);
   
   
   return (

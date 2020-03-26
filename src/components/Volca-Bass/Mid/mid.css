@@ -25,24 +25,28 @@
  .lfo-int.knob{
      grid-area: lfo-int;
  }
- .tune1.knob{
+
+.volume.knob{
+    grid-area: volume;
+}
+.filter.knob{
+    margin-top: -20px;
+}
+
+ /* TUNE KNOBS (SMALL) */
+ .tune1.small-knob{
      grid-area: tune1;
  }
- .tune2.knob{
+ .tune2.small-knob{
      grid-area: tune2;
  }
- .tune3.knob{
+ .tune3.small-knob{
      grid-area: tune3;
  }
- .tune.knob{
+ .tune.small-knob{
      margin-top: 8px;
  }
- .volume.knob{
-     grid-area: volume;
- }
- .filter.knob{
-     margin-top: -20px;
- }
+ 
  
  /* MAIN KNOB OVERLAYS */
  
@@ -76,36 +80,42 @@
       height: 37px;
       z-index: 10;
   }
-  div.tune1.knob{
+  
+  div.volume.knob{
+    grid-area: volume;
+    width: 38px;
+    height: 37px;
+    z-index: 10;
+ }
+  div.filter.knob{
+    margin-top: -20px;
+  }
+  
+  /* TUNE KNOBS OVER (SMALL) */
+  div.tune1.small-knob{
       grid-area: tune1;
       width: 20px;
       height: 20px;
       z-index: 10;
   }
-  div.tune2.knob{
+  div.tune2.small-knob{
       grid-area: tune2;
       width: 20px;
       height: 20px;
       z-index: 10;
   }
-  div.tune3.knob{
+  div.tune3.small-knob{
       grid-area: tune3;
       width: 20px;
       height: 20px;
       z-index: 10;
   }
-  div.tune.knob{
+  div.tune.small-knob{
       margin-top: 8px;
       width: 20px;
       height: 20px;
       z-index: 10;
   }
-  div.volume.knob{
-      grid-area: volume;
-      width: 38px;
-      height: 37px;
-      z-index: 10;
-  }
-  div.filter.knob{
-      margin-top: -20px;
-  }
+
+
+ 

@@ -1,10 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './bottom.css';
 
 
 
 
-function App() {
+function Bottom(props) {
+  const {buttonType, buttonClicked} = props;
+  useEffect(()=>{
+    console.log('buttonClicked', buttonClicked);
+    console.log('buttonType', buttonType)
+  },[buttonClicked, buttonType])
   return (
     <section id="buttons">
             {/* SCREEN */}
@@ -12,40 +17,57 @@ function App() {
               <rect width="94" height="45" rx="5" fill="black"/>
               </svg>
               {/* BUTTONS */}
-              <svg className="memory write button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="step slide button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="play active-step button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="stop step-rec button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="vco1 mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="vco2 mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="vco3 mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
-              <svg className="func button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="20" rx="2" fill="#FF0000"/>
-                <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
-              </svg>
+              <div className="memory-write over button"></div>
+              <svg className="memory-write button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+              
+              <div className="step-slide over button">
+              <svg className="step-slide button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+              </div> 
+              <div className="play-active-step over button">
+              <svg className="play-active-step button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div>   
+             <div className="stop-step-rec over button">
+             <svg className="stop-step-rec button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div> 
+             <div className="vco1-mute over button">
+             <svg className="vco1-mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div> 
+             <div className="vco2-mute over button">
+             <svg className="vco2-mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div>
+             <div className="vco3-mute over button">
+             <svg className="vco3-mute button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div>  
+             <div className="func over button">
+             <svg className="func button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="button-border button" width="40" height="20" rx="2"/>
+                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                </svg>
+             </div> 
+            
           </section>
   );
 }
 
-export default App;
+export default Bottom;

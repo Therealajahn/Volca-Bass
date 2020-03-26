@@ -87,7 +87,7 @@ function VolcaBass() {
       };
         
       async function releaseSynth(){
-        console.log('release');
+        // console.log('release');
       const { env, filtEnv } = sound;
           env.triggerRelease();
           filtEnv.triggerRelease();
@@ -190,6 +190,12 @@ function VolcaBass() {
   //update ui knobs clicked
   const [knobClicked, setKnobClicked] = useState();
   const [knobType, setKnobType] = useState();
+  //update tune ui knobs clicked
+  const [tuneKnobClicked, setTuneKnobClicked] = useState();
+  const [smallKnobType, setTuneKnobType] = useState();
+  //update ui buttons clicked
+  const [buttonClicked, setButtonClicked] = useState();
+  const [buttonType, setButtonType] = useState();
    //update on keyboard input
    const [keyPressed, setKeyPressed] = useState();
    const [whichPressed, setWhichPressed] = useState();
@@ -202,23 +208,26 @@ function VolcaBass() {
  
   
 
-  async function whenMouseMoves(event,firstClass){
-    event.preventDefault();
-    const previousPosition = 0;
-    const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
-    setMousePosition(adjustedMouse);
-    knobPosition[firstClass] = adjustedMouse;
-     
-  }
+  
 //i neeeed to route the mouse info to the mid component then I need to filter it into something that sets
 // the parameters for the synthesiszer so i need to set them in the 
 useEffect(()=>{
     function whenElementClicked(){
-    document.addEventListener('mousedown',(event) =>{
-      let firstClass,thirdClass,fourthClass;
-    
+      
+      //DUPLICATE mousemove works outside of event listener
+      // document.addEventListener('mousemove', (event)=>{
+      //   event.preventDefault();
+      //   const previousPosition = 0;
+      //   const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
+      //   setMousePosition(adjustedMouse);
+      // })
+      
+      document.addEventListener('mousedown',(event) =>{
+      let firstClass,secondClass,thirdClass,fourthClass;
+      
       if(typeof event.target.className === 'string'){
         firstClass = event.target.className.split(' ')[0];
+        secondClass = event.target.className.split(' ')[1];
         thirdClass = event.target.className.split(' ')[2];
         fourthClass = event.target.className.split(' ')[3];
       }
@@ -228,15 +237,27 @@ useEffect(()=>{
         setClickedNum(firstClass);
       }
       
-      if(thirdClass === 'knob' || fourthClass === 'knob'){
-        setKnobType(firstClass);
-        setKnobClicked(true);
-        document.addEventListener('mousemove', whenMouseMoves(event,firstClass));
+      // if(thirdClass === 'knob' || fourthClass === 'knob'){
+      //   setKnobType(firstClass);
+      //   setKnobClicked(true);
+      // }
+      //add condition for small knobs
+      
+      if(secondClass === 'tune'){
+        console.log(secondClass);
+        setTuneKnobClicked(true);
+        setTuneKnobType(firstClass);
+      }
+
+      if(thirdClass === 'button'){
+        console.log(thirdClass);
+        setButtonClicked(true);
+        setButtonType(firstClass);
       }
     });
     
     document.addEventListener('mouseup',() => {
-      document.removeEventListener('mousemove',whenMouseMoves);
+      setTuneKnobClicked(false);
       setKeyClicked(false);
     });
   }
@@ -263,14 +284,22 @@ return (
               <rect width='572' height='334' fill='#010101'/>
             </svg>
               <section id='face-plate'>
-                <Top />
+                <Top 
+                  //  topKnobClicked = {tuneKnobClicked}
+                  //  topsmallKnobType = {smallKnobType}
+                />
                 <Mid 
                   knobClicked = {knobClicked}
                   knobType = {knobType}
                   knobPosition = {knobPosition}
-                  mousePosition = {mousePosition}
+                  // mousePosition = {mousePosition}
+                  tuneKnobClicked = {tuneKnobClicked}
+                  tuneKnobType = {smallKnobType}
                   />
-                <Bottom />
+                <Bottom 
+                  buttonType = {buttonType}
+                  buttonClicked={buttonClicked}
+                />
               </section>  
           <Keyboard 
             keyClicked = {keyClicked}
