@@ -10,8 +10,11 @@ function Bottom(props) {
   let memoryBorder = useRef();
   useEffect(()=>{
     
-    let buttonColor;
+  
     console.log(memoryBorder.current.getAttribute('fill'));
+    if(buttonClicked){
+    memoryBorder.current.setAttribute('fill','#FF0000');
+    }
     // buttonColor = document.getElementsByClassName(buttonType)[0].object ;
     // console.log(buttonColor);
     
