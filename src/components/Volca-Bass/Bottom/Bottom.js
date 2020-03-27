@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useRef} from 'react';
 import './bottom.css';
 
 
@@ -6,9 +6,21 @@ import './bottom.css';
 
 function Bottom(props) {
   const {buttonType, buttonClicked} = props;
+  
+  let memoryBorder = useRef();
   useEffect(()=>{
-    console.log('buttonClicked', buttonClicked);
-    console.log('buttonType', buttonType)
+    
+    let buttonColor;
+    console.log(memoryBorder.current.getAttribute('fill'));
+    // buttonColor = document.getElementsByClassName(buttonType)[0].object ;
+    // console.log(buttonColor);
+    
+    // if (buttonClicked === true && buttonColor === "#686868"){
+    //   buttonColor = "#FF0000";
+    // }else if (buttonClicked === true && buttonColor === "#FF0000"){
+    //   buttonColor = "#686868";
+    // }
+    
   },[buttonClicked, buttonType])
   return (
     <section id="buttons">
@@ -18,9 +30,9 @@ function Bottom(props) {
               </svg>
               {/* BUTTONS */}
               <div className="memory-write over button"></div>
-              <svg className="memory-write button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="memory-write button" r width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect className="button-border button" width="40" height="20" rx="2"/>
-                  <rect x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                  <rect ref={memoryBorder} x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
                 </svg>
               <div className="step-slide over button"></div>
               <svg className="step-slide button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">

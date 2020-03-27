@@ -250,7 +250,7 @@ useEffect(()=>{
       }
 
       if(thirdClass === 'button'){
-        console.log(thirdClass);
+        console.log(event);
         setButtonClicked(true);
         setButtonType(firstClass);
       }
