@@ -259,6 +259,7 @@ useEffect(()=>{
     document.addEventListener('mouseup',() => {
       setTuneKnobClicked(false);
       setKeyClicked(false);
+      setButtonClicked(false);
     });
   }
  whenElementClicked();

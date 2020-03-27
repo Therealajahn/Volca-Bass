@@ -9,8 +9,9 @@
 }
 
 .button{
-    margin-top:10px;
+    margin-top: 10px;
 }
+
 
 .button-border{
     fill: #686868;
@@ -25,31 +26,31 @@
     grid-area: memory;
 }
 
-step-slide.button{
+.step-slide.button{
     grid-area: step;
 }
 
-play-active-step.button{
+.play-active-step.button{
     grid-area: play;
 }
 
-stop-step-rec.button{
+.stop-step-rec.button{
     grid-area: stop;
 }
 
-vco1-mute.button{
+.vco1-mute.button{
     grid-area: vco1;
 }
 
-vco2-mute.button{
+.vco2-mute.button{
     grid-area: vco2;
 }
 
-vco3-mute.button{
+.vco3-mute.button{
     grid-area: vco3;
 }
 
-func.button{
+.func.button{
     grid-area: func;
 }
 
@@ -64,28 +65,49 @@ div.memory-write.button{
 
 div.step-slide.button{
     grid-area: step;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.play-active-step.button{
     grid-area: play;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.stop-step-rec.button{
     grid-area: stop;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.vco1-mute.button{
     grid-area: vco1;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.vco2-mute.button{
     grid-area: vco2;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.vco3-mute.button{
     grid-area: vco3;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
 
 div.func.button{
     grid-area: func;
+    width: 40px;
+    height: 20px;
+    z-index: 10;
 }
