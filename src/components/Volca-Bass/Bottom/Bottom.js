@@ -11,9 +11,15 @@ function Bottom(props) {
   useEffect(()=>{
     
   
-    console.log(memoryBorder.current.getAttribute('fill'));
+    let buttonColor = memoryBorder.current.getAttribute('fill');
+    console.log(buttonColor);
     if(buttonClicked){
-    memoryBorder.current.setAttribute('fill','#FF0000');
+      if(buttonColor === '#686868'){
+      memoryBorder.current.setAttribute('fill','#FF0000');
+      };
+      if(buttonColor === '#FF0000'){
+        memoryBorder.current.setAttribute('fill', '#686868');
+        };
     }
     // buttonColor = document.getElementsByClassName(buttonType)[0].object ;
     // console.log(buttonColor);
@@ -34,8 +40,8 @@ function Bottom(props) {
               {/* BUTTONS */}
               <div className="memory-write over button"></div>
               <svg className="memory-write button" r width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="button-border button" width="40" height="20" rx="2"/>
-                  <rect ref={memoryBorder} x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
+                  <rect className="button-border button" ref={memoryBorder} fill= '#686868' width="40" height="20" rx="2"/>
+                  <rect  x="3" y="3" width="34" height="14" rx="2" fill="#C4C4C4"/>
                 </svg>
               <div className="step-slide over button"></div>
               <svg className="step-slide button" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
