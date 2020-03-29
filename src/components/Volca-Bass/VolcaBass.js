@@ -60,18 +60,23 @@ function VolcaBass() {
                 filtEnv:filtEnv }
       });
  
-  const triggerOrRelease = useCallback((gate, note) => { 
+  const triggerOrRelease = useCallback((gate, note, duration) => { 
       
       if(gate === 1){
         triggerSynth(note);
       }else if(gate === 0){
         releaseSynth();
       }else if(gate === 'loop'){
-        attackAndRelease(arguments[1],note);
+        console.log("arguments:", arguments);
+        console.log("duration:",duration);
+        console.log("note:",note);
+        attackAndRelease(arguments[1], arguments[2]);
       };
       
 
       async function attackAndRelease(duration,note){
+        console.log('attackAndReleaseNote', note);
+        console.log('attackAndReleaseDuration', duration);
         const { env, filtEnv } = sound;
         updateOscs(note);
         env.triggerAttackRelease(duration);
@@ -135,24 +140,24 @@ function VolcaBass() {
     }
   
   //TODO: convert these to async functions
-  const play = useRef({    
-    playNotes:
-      function playNotes(notes) {
+     
+    
+  async function playNotes() {
         console.log('playnotes runs'); 
-        console.log(notes);      
-
+        // console.log(notes);      
+        let notes = ['c1', 'c1', 'c1', 'c1'];
         let counter = 0;
         new Tone.Loop(() => {
           
-          triggerOrRelease('loop','32n',notes[counter % 4]);
+          triggerOrRelease('loop','c1','32n');
           
           counter = (counter + 1) % 16;
         },'16n').start(0);
         Tone.Transport.swing = 0;
         Tone.Transport.toggle().bpm.value = 30;
-      }
+  }
     
-  });
+ 
 
   useEffect(() => { 
       function startAudioContext(){    
@@ -275,7 +280,7 @@ useEffect(()=>{
     });
   }
  whenKeyPressed();       
-}, []);
+});
 
 return (
       <section id='volca-bass-container'>
@@ -300,6 +305,7 @@ return (
                 <Bottom 
                   buttonType = {buttonType}
                   buttonClicked={buttonClicked}
+                  playNotes={playNotes}
                 />
               </section>  
           <Keyboard 
