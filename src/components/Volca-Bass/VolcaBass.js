@@ -219,13 +219,13 @@ function VolcaBass() {
 useEffect(()=>{
     function whenElementClicked(){
       
-      //DUPLICATE mousemove works outside of event listener
-      // document.addEventListener('mousemove', (event)=>{
-      //   event.preventDefault();
-      //   const previousPosition = 0;
-      //   const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
-      //   setMousePosition(adjustedMouse);
-      // })
+      // DUPLICATE mousemove works outside of event listener
+      document.addEventListener('mousemove', (event)=>{
+        event.preventDefault();
+        const previousPosition = 0;
+        const adjustedMouse = previousPosition + (((event.clientY / 2) - 100) * -1);
+        setMousePosition(adjustedMouse);
+      })
       
       document.addEventListener('mousedown',(event) =>{
       let firstClass,secondClass,thirdClass,fourthClass;
@@ -242,10 +242,10 @@ useEffect(()=>{
         setClickedNum(firstClass);
       }
       
-      // if(thirdClass === 'knob' || fourthClass === 'knob'){
-      //   setKnobType(firstClass);
-      //   setKnobClicked(true);
-      // }
+      if(thirdClass === 'knob' || fourthClass === 'knob'){
+        setKnobType(firstClass);
+        setKnobClicked(true);
+      }
       //add condition for small knobs
       
       if(secondClass === 'tune'){
@@ -264,6 +264,7 @@ useEffect(()=>{
     document.addEventListener('mouseup',() => {
       setTuneKnobClicked(false);
       setKeyClicked(false);
+      setKnobClicked(false);
       setButtonClicked(false);
     });
   }
@@ -298,7 +299,7 @@ return (
                   knobClicked = {knobClicked}
                   knobType = {knobType}
                   knobPosition = {knobPosition}
-                  // mousePosition = {mousePosition}
+                  mousePosition = {mousePosition}
                   tuneKnobClicked = {tuneKnobClicked}
                   tuneKnobType = {smallKnobType}
                   />

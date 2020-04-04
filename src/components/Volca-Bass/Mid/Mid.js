@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./mid.css";
 import gsap from 'gsap';
 
@@ -7,19 +7,24 @@ import gsap from 'gsap';
 
 function Mid(props) {
 
-// const { knobClicked, knobType, knobPosition, mousePosition } = props;
- // useEffect(()=>{
-  //   let element = document.getElementsByClassName(knobType);
-  //   console.log(mousePosition);
+const { knobClicked, knobType, knobPosition, mousePosition } = props;
+ 
+// useEffect(()=>{
+//     let element = document.getElementsByClassName(knobType);
+//     console.log(mousePosition);
     
-  //  gsap.to(element,{duration: .1, rotation: Number(mousePosition)}); 
-  // },[knobPosition, knobType, mousePosition])
+//    gsap.to(element,{duration: .1, rotation: Number(mousePosition)}); 
+//   },[knobPosition, knobType, mousePosition])
 
-const {tuneKnobType, tuneKnobClicked} = props;
-
+//Choppy
 useEffect(()=>{
-  
-},[tuneKnobClicked, tuneKnobType]);
+  console.log('mouse:',mousePosition);
+  console.log('knobType:', knobType);
+  console.log('knobClicked:',knobClicked);
+  setFilter({
+     transform: `rotate(${mousePosition}deg)`
+  })
+},[mousePosition, knobType, knobClicked]);
 
   return (
     <div className="Mid">
@@ -36,7 +41,7 @@ useEffect(()=>{
               <path fillRule="evenodd" clipRule="evenodd" d="M1.82843 10.5714C0.656018 12.9745 0 15.6626 0 18.5C0 28.7173 8.50659 37 19 37C29.4934 37 38 28.7173 38 18.5C38 15.6626 37.344 12.9745 36.1716 10.5714H1.82843Z" fill="#C4C4C4"/>
             </svg>
             <div className="filter over knob"></div>
-            <svg className="filter knob" width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="filter knob" style = { filter } width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="37.5" cy="37.5" r="37.5" fill="#727272"/>
                 <path fillRule="evenodd" clipRule="evenodd" d="M3.60874 21.4286C1.29477 26.2996 0 31.7486 0 37.5C0 58.2107 16.7893 75 37.5 75C58.2107 75 75 58.2107 75 37.5C75 31.7486 73.7052 26.2996 71.3913 21.4286H3.60874Z" fill="#C4C4C4"/>
             </svg>
