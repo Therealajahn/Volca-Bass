@@ -1,6 +1,6 @@
-import Button from '../Controls/Button';
 import React from 'react';
 import './bottom.css';
+import Button from '../Controls/Button';
 
 
 
