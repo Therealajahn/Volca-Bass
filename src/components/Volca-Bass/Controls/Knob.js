@@ -5,20 +5,25 @@ import gsap from 'gsap';
 function Knob(props){
     
     const {type, size} = props;
-    
+    const [mouseDown, setMouseDown] = useState(false)
+    const [mousePosition, setMousePosition] = useState(0);
     const knobClass = `${type}`;
     const overlay = `${type} over knob`;
     const knob = useRef();
     
     function knobIsClicked(mouseDown){
-      setMouseDown(mouseDown);  
+      setMouseDown(mouseDown);
+      setKnobType(class);  
     }
 
     useEffect(()=>{
-        
-        
-        gsap.to(knob.current,{duration: .1, rotation: Number(mousePosition)});  
+        document.addEventListener('mousemove', (event)=>{
+            setMousePosition(event.clientY);
+        })
     },[])
+    useEffect(()=>{
+        gsap.to(knob.current,{duration: .1, rotation: Number(mousePosition)});  
+    },[mousePosition])
     
     function setKnobSize(){
 
