@@ -13,7 +13,7 @@ function Knob(props){
     
     function knobIsClicked(mouseDown){
       setMouseDown(mouseDown);
-      setKnobType(class);  
+    //   setKnobType(class);  
     }
 
     useEffect(()=>{
