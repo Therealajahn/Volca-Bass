@@ -1,20 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./mid.css";
 import Knob from '../Controls/Knob';
-import gsap from 'gsap';
+
 
 
 
 
 function Mid(props) {
 
-const { knobClicked, knobType, knobPosition, mousePosition } = props;
+const { mousePosition } = props;
+
+// const knobClicked = useRef(false);
+// const knobType = useRef();
  
-function knobIsClicked(knob, mouse){
-  console.log('knob',knob);
-  console.log('mouse', mouse);
-  gsap.to(knob,{duration: .1, rotation: Number(mousePosition)}); 
-}
+// function knobIsClicked(knob, mouse){
+//   console.log('knob',knob);
+//   console.log('mouse', mouse);
+//   knobType.current = knob; 
+//   console.log('knobType',knobType.current);
+// }
+// useEffect(()=>{
+//   gsap.to(knobType.current,{duration: .1, rotation: Number(mousePosition)}); 
+// },[knobType])
 
 //Choppy
 // useEffect(()=>{
@@ -37,7 +44,7 @@ function knobIsClicked(knob, mouse){
               <ellipse cx="19" cy="18.5" rx="19" ry="18.5" fill="#727272"/>
               <path fillRule="evenodd" clipRule="evenodd" d="M1.82843 10.5714C0.656018 12.9745 0 15.6626 0 18.5C0 28.7173 8.50659 37 19 37C29.4934 37 38 28.7173 38 18.5C38 15.6626 37.344 12.9745 36.1716 10.5714H1.82843Z" fill="#C4C4C4"/>
             </svg>
-            <Knob size='big' type='filter' knobIsClicked={ knobIsClicked }/>
+            <Knob size='big' type='filter'/>
             <div className="lfo-rate over knob"></div>
             <svg className="lfo-rate knob"width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="19" cy="18.5" rx="19" ry="18.5" fill="#727272"/>
